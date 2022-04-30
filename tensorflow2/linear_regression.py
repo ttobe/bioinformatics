@@ -29,6 +29,3 @@ model.compile(optimizer=SGD(learning_rate=1e-2), loss='mse')
 model.summary()
 
 hist = model.fit(x_data, t_data, epochs=1000)
-
-result = model.predict(np.array([-3.1, 3.0, 3.5, 15.0, 20.1]))
-print(result)

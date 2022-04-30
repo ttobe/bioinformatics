@@ -27,5 +27,4 @@ model.add(Dense(1,input_shape=(3, ), activation='linear'))
 # [3] 모델 (model) 컴파일 및 summary
 model.compile(optimizer=SGD(learning_rate=1e-2), loss='mse') 
 model.summary()
-
 hist = model.fit(x_data, t_data, epochs=1000)

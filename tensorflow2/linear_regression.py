@@ -59,3 +59,26 @@ prediction_val = model.predict(np.array(test_data))
 print(prediction_val)
 print('==================')
 print(ret_val)
+
+# 모델 입력, 출력, 가중치 확인
+
+print(model.input)
+print(model.output)
+print(model.weights)
+
+
+
+# 손실함수 출력
+
+import matplotlib.pyplot as plt
+
+plt.title('Loss Trend')
+plt.xlabel('epochs')
+plt.ylabel('loss')
+plt.grid()
+
+plt.plot(hist.history['loss'], label='train loss')
+plt.legend(loc='best')
+
+plt.show()
+

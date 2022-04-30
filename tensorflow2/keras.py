@@ -25,3 +25,5 @@ hist = model.fit(x_data, t_data, epochs=1000)
 
 result = model.predict(np.array([-3.1, 3.0, 3.5, 15.0, 20.1]))
 print(result)
+
+model.save('model1.h500')

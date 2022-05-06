@@ -55,11 +55,11 @@ except Exception as err:
 model = Sequential()
 
 # 노드 1개인 출력층 생성
-#training t data shape = 759, 8 >> shape[1] = 8!!!
-#input shape[1] = 1
+#training t data shape = 759, 1 >> shape[1] = 1!!!
+#input shape[1] = 8
 model.add(Dense(training_t_data.shape[1], input_shape=(training_x_data.shape[1], ), activation='sigmoid'))
 
-# 학습을 위한 optimizer, 손실함수 loss 정의
+# 학습을 위한 optimizer, 손실6함수 loss 정의
 model.compile(optimizer=SGD(learning_rate=0.01), loss='binary_crossentropy', metrics=['accuracy'])
 
 model.summary()

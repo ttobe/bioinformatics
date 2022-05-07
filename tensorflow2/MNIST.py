@@ -52,7 +52,7 @@ model.compile(optimizer=Adam(learning_rate=1e-3), loss='categorical_crossentropy
 model.summary()
 #model.fit 30% validaton
 hist = model.fit(x_train, t_train, epochs=30, validation_split=0.3)
-#model.evaluate() 
+#model.evaluate()
 model.evaluate(x_test,t_test)
 
 plt.title('Loss')

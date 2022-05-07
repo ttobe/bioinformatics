@@ -17,7 +17,7 @@ from tensorflow.keras.layers import Dropout, Dense, LSTM
 #현시점의 데이터와 과거의 은닉층 값에 각각의 가중치를 곱한 후에 더하고 sigmoid
 #결과가 1에 가까울수록 과거의 정보를 많이 가져간다
 
-#input gate 현재의 정보를 과거에 얼마나 반영할지
+#input gate 현재의 정보를 과거 정보에 얼마나 반영할지
 #현재시점의 데이터와 과거의 은닉층 값에 각각의 가중치를 곱하고 더하고 sigmoid
 #어떤 정보를 업데이트 할 지 결정하는 것
 #현재 시점의 데이터와 과거 은닉층의 값에 가중치를 곱하고 더하고 tanh

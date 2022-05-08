@@ -45,10 +45,11 @@ print(raw_df.head())
 
 #데이터 전처리 - normalization - feature column label column
 #비정상적으로 크거나 작은 데이터인 outlier를 적절한 값으로 바꾸거나 삭제 등 처리하는게 필요
-print(raw_df.describe())#통계 정보 전체 확인
+print(raw_df.describe()) # 통계 정보 전체 확인
 #거래량 volume의 최소가 0 -> 공휴일이나 주말 -> 값이 없다는 missing value로 처리
 #missing value -> 누락된 데이터 - 적절한 값 조정 or 삭제
 print(raw_df.isnull().sum()) #missing value 찾기
+
 #보통 missing value는 행 전체를 삭제하는게 일반적임
 print(raw_df.loc[raw_df['Open'].isna()]) 
 
@@ -77,3 +78,97 @@ print(scaled_df)
 #입력데이터인 feature와 정답 label으로 시계열 데이터 생성
 #batch_size 데이터의 개수, time_steps = window size, input_dims
 #fit
+# 입력 파라미터 feature, label => numpy type
+
+def make_sequene_dataset(feature, label, window_size):
+
+    feature_list = []      # 생성될 feature list
+    label_list = []        # 생성될 label list
+
+    for i in range(len(feature)-window_size):
+
+        feature_list.append(feature[i:i+window_size])
+        label_list.append(label[i+window_size])
+
+    return np.array(feature_list), np.array(label_list)
+
+
+# feature_df, label_df 생성
+
+feature_cols = [ '3MA', '5MA', 'Adj Close' ]
+label_cols = [ 'Adj Close' ]
+
+feature_df = pd.DataFrame(scaled_df, columns=feature_cols)
+label_df = pd.DataFrame(scaled_df, columns=label_cols)
+
+
+
+# DataFrame => Numpy 변환
+
+feature_np = feature_df.to_numpy()
+label_np = label_df.to_numpy()
+
+print(feature_np.shape, label_np.shape)
+
+window_size = 40
+
+X, Y = make_sequene_dataset(feature_np, label_np, window_size)
+
+print(X.shape, Y.shape)
+
+
+
+# train, test 분리
+
+#split = int(len(X)*0.95)
+split = -200
+
+x_train = X[0:split]
+y_train = Y[0:split]
+
+x_test = X[split:]
+y_test = Y[split:]
+
+print(x_train.shape, y_train.shape)
+print(x_test.shape, y_test.shape)
+
+# model 생성
+
+model = Sequential()
+
+model.add(LSTM(128, activation='tanh', input_shape=x_train[0].shape))
+model.add(Dense(1, activation='linear'))
+model.compile(loss='mse', optimizer='adam', metrics=['mae'])
+model.summary()
+
+
+
+from tensorflow.keras.callbacks import EarlyStopping
+
+early_stop = EarlyStopping(monitor='val_loss', patience=5)
+
+model.fit(x_train, y_train, 
+          validation_data=(x_test, y_test),
+          epochs=100, batch_size=16,
+          callbacks=[early_stop])
+
+
+
+pred = model.predict(x_test)
+
+plt.figure(figsize=(12, 6))
+plt.title('3MA + 5MA + Adj Close, window_size=40')
+plt.ylabel('adj close')
+plt.xlabel('period')
+plt.plot(y_test, label='actual')
+plt.plot(pred, label='prediction')
+plt.grid()
+plt.legend(loc='best')
+
+plt.show()
+
+print( np.sum(abs(y_test-pred)/y_test) / len(x_test) )
+
+
+
+

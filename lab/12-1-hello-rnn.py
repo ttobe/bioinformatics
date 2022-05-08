@@ -23,11 +23,8 @@ print(y_one_hot)
 
 model = Sequential()
 #cell의 개수는 5개, input은 6글자니까 6, 차원은 5이니까 5
-cell = (LSTMCell(5, input_shape=(6, 5)))
-model.add(RNN(cell=cell, return_sequences=True))
-#model.add(LSTM(5, input_shape=(6,5), return_sequences=True))
-model.add(TimeDistributed(Dense(5, activation='softmax')))
-model.compile(optimizer=Adam(learning_rate=0.1), loss='categorical_crossentropy', metrics=['accuacy'])
+model.add(LSTM(5, input_shape=(6,5),return_sequences=True))
+model.compile(optimizer=Adam(learning_rate=0.1), loss='categorical_crossentropy', metrics=['accuracy'])
 model.fit(x_one_hot, y_one_hot, epochs=50)
 predictions = model.predict(x_one_hot)
 print(predictions)

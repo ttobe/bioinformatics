@@ -61,6 +61,8 @@ batch size가 100이고, learning rate 가 0.005이고, dropout 이 0.4 일때 *
 ## 22/08/31
 ### 기존 seq2seq 모델 학습 후 실행 해보기
 
+![비교](https://user-images.githubusercontent.com/101859033/208860234-86dd1404-5f0b-4841-99c4-e2a5c570f47b.png)
+
 ![결과2](https://user-images.githubusercontent.com/101859033/208855133-10f65f1d-ca44-48d4-bf1e-3b9220cce332.png)
 
 논문에서 말하는 정확성, 직접 코드를 보고 학습하고 평가한 정확성, Attention을 적용한 코드로 학습하고 평가한 정확성을 비교한 표

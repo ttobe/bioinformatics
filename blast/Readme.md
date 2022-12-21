@@ -41,6 +41,7 @@ batch size가 100이고, learning rate 가 0.005이고, dropout 이 0.4 일때 9
 - miTAR 데이터가 일단 웹에서 Blast로 검색이 되는지
 : 나오지 않았습니다. 논문에서는 local data로 사용했다고 해서, 로컬 db에 넣는 방법을 찾고있습니다.
  Then these predicted microRNA sequences will be mapped to their microRNA IDs using BLASTx algorithm on local database containing microRNA ID and respective sequences retrieved from mirBase Release 22, March 2018- hence giving a list of predicted microRNA IDs as output.
+ - 로컬 DB에 넣기 성공했습니다. 해당 파일은 Blast_AddData.py
  
 - seq2seq data를 miTar 모델에 넣어서 돌려보고 그 결과를 blast
  miRNA를 Blast를 통해 돌려봤더니 10000개 중에 9997개가 다 blast가 되었습니다
@@ -57,5 +58,19 @@ batch size가 100이고, learning rate 가 0.005이고, dropout 이 0.4 일때 9
 - 기존 seq2seq 모델 학습 후 실행 해보기
 
 ![결과2](https://user-images.githubusercontent.com/101859033/208855133-10f65f1d-ca44-48d4-bf1e-3b9220cce332.png)
-논문에서 말하는 정확성, 직접 코드를 보고 학습하고 평가한 정확성, Attention을 적용한 코드로 학습하고 평가한 정확성
+
+논문에서 말하는 정확성, 직접 코드를 보고 학습하고 평가한 정확성, Attention을 적용한 코드로 학습하고 평가한 정확성을 비교한 표
+
+22/09/07
+
+![결과3](https://user-images.githubusercontent.com/101859033/208855860-7d598f34-aa59-4888-b2b2-7f71ee234aa4.png)
+
+miTAR 데이터와 seq2seq 데이터를 둘 다 Attention 모델에 학습을 해본 결과입니다.  
+현저히 정확성이 떨어지는 결과가 나왔습니다.
+
+문제를 다음과 같이 인풋 데이터에 대한 길이 차이로 봤습니다.
+![문제](https://user-images.githubusercontent.com/101859033/208856234-cfdf8d6a-d418-4ab9-aab4-d68e9a05c6c7.png)
+
+두 논문에서 사용하는 miRNA의 길이가 왜 다른지는 정확히 파악을 할 수 없었습니다.
+
 

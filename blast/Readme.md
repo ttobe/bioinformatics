@@ -15,12 +15,12 @@ Seq2seq는 Encoder-Decoder 학습을 통해 miRNA를 예측
 후 이 miRNA로 Blast를 통해 input mRNA_ID가 있는지 확인
 ***
 ## 22/07/13
->- miTAR에서 사용한 데이터로 Seq2seq모델에 적용해보기.  
+- miTAR에서 사용한 데이터로 Seq2seq모델에 적용해보기.  
  
-> ||E-value = 0.01|E-value = 0.005|E-value = 0.001|
-> |------|:---:|:---:|:---:|
-> |miTAR|3.5%|1.2%|0.3%|
-> |seq2seq|100% |100% |100%|
+||E-value = 0.01|E-value = 0.005|E-value = 0.001|
+|------|:---:|:---:|:---:|
+|miTAR|3.5%|1.2%|0.3%|
+|seq2seq|100% |100% |100%|
 ***
 ## 22/07/20
 - seq2seq data를 miTar 모델에 넣어서 돌려보기
